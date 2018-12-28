@@ -13,6 +13,8 @@ source:
     - luaconf.patch
     # Enables readline on linux
     - Makefile.patch
+    # allows use of compilers other than gcc (respect CC env var)
+    - default_compiler.patch
 
 build:
   number: 0
