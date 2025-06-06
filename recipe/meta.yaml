@@ -42,7 +42,7 @@ about:
   summary: Lua is a powerful, fast, lightweight, embeddable scripting language
   license: MIT
   license_family: MIT
-  license_file: https://www.lua.org/license.html
+  license_url: https://www.lua.org/license.html
   doc_url: https://www.lua.org/docs.html
   dev_url: https://www.lua.org/source/
   description: |
