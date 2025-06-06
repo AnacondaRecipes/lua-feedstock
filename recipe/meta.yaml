@@ -1,4 +1,4 @@
-{% set version = "5.3.4" %}
+{% set version = "5.4.8" %}
 
 package:
   name: lua
@@ -6,15 +6,8 @@ package:
 
 source:
   fn: lua-{{ version }}.tar.gz
-  url: http://www.lua.org/ftp/lua-{{ version }}.tar.gz
-  md5: 53a9c68bcc0eda58bdc2095ad5cdfc63
-  patches:
-    # Enables Lua to look for packages on a relative path
-    - luaconf.patch
-    # Enables readline on linux
-    - Makefile.patch
-    # allows use of compilers other than gcc (respect CC env var)
-    - default_compiler.patch
+  url: https://www.lua.org/ftp/lua-{{ version }}.tar.gz
+  md5: 81cf5265b8634967d8a7480d238168ce
 
 build:
   number: 0
@@ -24,15 +17,19 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-  host:
-    - readline
-    - ncurses
-  run:
-    - readline
-    - ncurses
+  # host:
+  #   - readline
+  #   - ncurses
+  # run:
+  #   - readline
+  #   - ncurses
 
 test:
   commands:
+    - test -f $PREFIX/bin/lua
+    - test -f $PREFIX/bin/luac
+    - test -f $PREFIX/lib/liblua.a
+    - test -f $PREFIX/include/lua.h
     - lua -v
     - lua -e "print(package.path)"
 
