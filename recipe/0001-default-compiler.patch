@@ -1,8 +1,8 @@
 diff --git a/src/Makefile b/src/Makefile
-index b771196..fab832a 100644
+index b771196..0933de5 100644
 --- a/src/Makefile
 +++ b/src/Makefile
-@@ -6,12 +6,13 @@
+@@ -6,13 +6,14 @@
  # Your platform. See PLATS for possible values.
  PLAT= guess
  
@@ -13,11 +13,13 @@ index b771196..fab832a 100644
  LIBS= -lm $(SYSLIBS) $(MYLIBS)
  
 -AR= ar rcu
+-RANLIB= ranlib
 +AR?= ar
 +AR_CALL= $(AR) rcu
- RANLIB= ranlib
++RANLIB?= ranlib
  RM= rm -f
  UNAME= uname
+ 
 @@ -57,7 +58,7 @@ o:	$(ALL_O)
  a:	$(ALL_A)
  
