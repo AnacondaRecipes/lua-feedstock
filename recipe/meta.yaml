@@ -7,7 +7,7 @@ package:
 source:
   fn: lua-{{ version }}.tar.gz
   url: https://www.lua.org/ftp/lua-{{ version }}.tar.gz
-  md5: 81cf5265b8634967d8a7480d238168ce
+  sha256: 4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae
 
 build:
   number: 0
@@ -34,9 +34,17 @@ test:
     - lua -e "print(package.path)"
 
 about:
-  home: http://www.lua.org/
+  home: https://www.lua.org/
   summary: Lua is a powerful, fast, lightweight, embeddable scripting language
   license: MIT
+  license_family: MIT
+  license_file: https://www.lua.org/license.html
+  doc_url: https://www.lua.org/docs.html
+  dev_url: https://www.lua.org/source/
+  description: |
+    Lua is a powerful, efficient, lightweight, embeddable scripting language.
+    It supports procedural programming, object-oriented programming, functional 
+    programming, data-driven programming, and data description.
 
 extra:
   recipe-maintainers:
