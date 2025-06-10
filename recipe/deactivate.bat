@@ -1,2 +1,0 @@
-set LUA_PATH=
-set LUA_CPATH=

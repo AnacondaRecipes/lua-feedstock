@@ -12,15 +12,14 @@ source:
     - 0001-default-compiler.patch
 
 build:
+  skip: true  # [win]
   number: 0
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - patch  # [not win]
-    - m2-patch  # [win]
-    - make  # [not win]
-    - ucrt64-make  # [win]
+    - patch
+    - make
 
 test:
   commands:
