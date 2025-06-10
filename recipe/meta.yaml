@@ -13,20 +13,12 @@ source:
 
 build:
   number: 0
-  detect_binary_files_with_prefix: true
-  skip: True  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - make
     - patch
-  # host:
-  #   - readline
-  #   - ncurses
-  # run:
-  #   - readline
-  #   - ncurses
 
 test:
   commands:
@@ -35,7 +27,8 @@ test:
     - test -f $PREFIX/lib/liblua.a
     - test -f $PREFIX/include/lua.h
     - lua -v
-    - lua -e "print(package.path)"
+    - lua -e "print(\"Lua path:\" .. package.path)"
+    - lua -e "print(\"Lua cpath:\" .. package.cpath)"
 
 about:
   home: https://www.lua.org/
