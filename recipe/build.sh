@@ -1,10 +1,11 @@
-CHANGE="deactivate"
-mkdir -p "${PREFIX}/etc/conda/${CHANGE}.d"
-cp "${RECIPE_DIR}/${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/${PKG_NAME}_${CHANGE}.sh"
+for CHANGE in "activate" "deactivate"
+do
+	mkdir -p "${PREFIX}/etc/conda/${CHANGE}.d"
+	cp "${RECIPE_DIR}/${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/${PKG_NAME}_${CHANGE}.sh"
+done
 
-CHANGE="activate"
-mkdir -p "${PREFIX}/etc/conda/${CHANGE}.d"
-cp "${RECIPE_DIR}/${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/${PKG_NAME}_${CHANGE}.sh"
+SHORT_VERSION="${PKG_VERSION%.*}"
+sed -i.bak "s|@PKG_VERSION@|${SHORT_VERSION}|g" "${PREFIX}/etc/conda/activate.d/${PKG_NAME}_activate.sh"
 
 if [ `uname` == Darwin ]; then
 	make macosx INSTALL_TOP=$PREFIX MYCFLAGS="-fPIC -I$PREFIX/include" MYLDFLAGS="-Wl,-rpath,$PREFIX/lib"
