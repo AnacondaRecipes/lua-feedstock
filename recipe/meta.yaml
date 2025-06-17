@@ -1,4 +1,4 @@
-{% set version = "5.3.4" %}
+{% set version = "5.4.8" %}
 
 package:
   name: lua
@@ -6,40 +6,43 @@ package:
 
 source:
   fn: lua-{{ version }}.tar.gz
-  url: http://www.lua.org/ftp/lua-{{ version }}.tar.gz
-  md5: 53a9c68bcc0eda58bdc2095ad5cdfc63
+  url: https://www.lua.org/ftp/lua-{{ version }}.tar.gz
+  sha256: 4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae
   patches:
-    # Enables Lua to look for packages on a relative path
-    - luaconf.patch
-    # Enables readline on linux
-    - Makefile.patch
-    # allows use of compilers other than gcc (respect CC env var)
-    - default_compiler.patch
+    - 0001-default-compiler.patch
 
 build:
+  skip: true  # [win]
   number: 0
-  detect_binary_files_with_prefix: true
-  skip: True  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
-  host:
-    - readline
-    - ncurses
-  run:
-    - readline
-    - ncurses
+    - patch
+    - make
 
 test:
   commands:
+    - test -f $PREFIX/bin/lua
+    - test -f $PREFIX/bin/luac
+    - test -f $PREFIX/lib/liblua.a
+    - test -f $PREFIX/include/lua.h
     - lua -v
-    - lua -e "print(package.path)"
+    - lua -e "print(\"Lua path:\" .. package.path)"
+    - lua -e "print(\"Lua cpath:\" .. package.cpath)"
 
 about:
-  home: http://www.lua.org/
+  home: https://www.lua.org/
   summary: Lua is a powerful, fast, lightweight, embeddable scripting language
   license: MIT
+  license_family: MIT
+  license_url: https://www.lua.org/license.html
+  doc_url: https://www.lua.org/docs.html
+  dev_url: https://www.lua.org/source/
+  description: |
+    Lua is a powerful, efficient, lightweight, embeddable scripting language.
+    It supports procedural programming, object-oriented programming, functional 
+    programming, data-driven programming, and data description.
 
 extra:
   recipe-maintainers:
