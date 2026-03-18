@@ -19,6 +19,12 @@ requirements:
     - ninja  # [win]
     - cmake  # [win]
     - make
+  host:
+    - readline  # [unix]
+    - ncurses  # [unix]
+  run:
+    - readline  # [unix]
+    - ncurses  # [unix]
 
 test:
   commands:
