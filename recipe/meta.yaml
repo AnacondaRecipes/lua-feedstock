@@ -18,7 +18,7 @@ requirements:
     - {{ stdlib('c') }}
     - ninja  # [win]
     - cmake  # [win]
-    - make
+    - make  # [unix]
   host:
     - readline  # [unix]
     - ncurses  # [unix]
