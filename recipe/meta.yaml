@@ -28,14 +28,15 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/lua                      # [unix]
-    - test -f $PREFIX/bin/luac                     # [unix]
-    - test -f $PREFIX/lib/liblua.a                 # [unix]
-    - test -f $PREFIX/include/lua.h                # [unix]
-    - if not exist %PREFIX%\\bin\\lua.dll exit 1   # [win]
-    - if not exist %PREFIX%\\bin\\lua.exe exit 1   # [win]
-    - if not exist %PREFIX%\\bin\\luac.exe exit 1  # [win]
-    - if not exist %PREFIX%\\lib\\lua.lib          # [win]
+    - test -f $PREFIX/bin/lua                       # [unix]
+    - test -f $PREFIX/bin/luac                      # [unix]
+    - test -f $PREFIX/lib/liblua.a                  # [unix]
+    - test -f $PREFIX/include/lua.h                 # [unix]
+    - if not exist %PREFIX%\\bin\\lua.dll exit 1    # [win]
+    - if not exist %PREFIX%\\bin\\lua.exe exit 1    # [win]
+    - if not exist %PREFIX%\\bin\\luac.exe exit 1   # [win]
+    - if not exist %PREFIX%\\lib\\lua.lib exit 1    # [win]
+    - if not exist %PREFIX%\\include\\lua.h exit 1  # [win]
     - lua -v
     - lua -e "print(\"Lua path:\" .. package.path)"
     - lua -e "print(\"Lua cpath:\" .. package.cpath)"
