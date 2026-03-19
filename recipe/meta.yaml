@@ -32,11 +32,11 @@ test:
     - test -f $PREFIX/bin/luac                      # [unix]
     - test -f $PREFIX/lib/liblua.a                  # [unix]
     - test -f $PREFIX/include/lua.h                 # [unix]
-    - if not exist %PREFIX%\\bin\\lua.dll exit 1    # [win]
-    - if not exist %PREFIX%\\bin\\lua.exe exit 1    # [win]
-    - if not exist %PREFIX%\\bin\\luac.exe exit 1   # [win]
-    - if not exist %PREFIX%\\lib\\lua.lib exit 1    # [win]
-    - if not exist %PREFIX%\\include\\lua.h exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\lua.dll exit 1    # [win]
+    - if not exist %LIBRARY_BIN%\\lua.exe exit 1    # [win]
+    - if not exist %LIBRARY_BIN%\\luac.exe exit 1   # [win]
+    - if not exist %LIBRARY_LIB%\\lua.lib exit 1    # [win]
+    - if not exist %LIBRARY_INC%\\lua.h exit 1      # [win]
     - lua -v
     - lua -e "print(\"Lua path:\" .. package.path)"
     - lua -e "print(\"Lua cpath:\" .. package.cpath)"
