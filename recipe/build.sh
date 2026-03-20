@@ -12,6 +12,6 @@ if [ `uname` == Darwin ]; then
 	make macosx test
 elif [ `uname` == Linux ]; then
 	make linux INSTALL_TOP=$PREFIX MYCFLAGS="-fPIC -I$PREFIX/include -DLUA_USE_LINUX" MYLDFLAGS="-Wl,-rpath=$PREFIX/lib"
-	make linux-readline test
+	make linux test
 fi
 make install INSTALL_TOP=$PREFIX
