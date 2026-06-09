@@ -5,28 +5,42 @@ package:
   version: {{ version }}
 
 source:
-  fn: lua-{{ version }}.tar.gz
-  url: https://www.lua.org/ftp/lua-{{ version }}.tar.gz
-  sha256: 4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae
-  patches:
-    - 0001-default-compiler.patch
+  - url: https://www.lua.org/ftp/lua-{{ version }}.tar.gz
+    sha256: 4f18ddae154e793e46eeab727c59ef1c0c0c2b744e7b94219710d76f530629ae
+    patches:
+      - 0001-default-compiler.patch
+  - path: CMakeLists.txt
 
 build:
-  skip: true  # [win]
-  number: 0
+  number: 1
+  skip: true  # [not win]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - patch
-    - make
+    - {{ stdlib('c') }}
+    - patch  # [unix]
+    - make  # [unix]
+    - ninja  # [win]
+    - cmake  # [win]
+  host:
+    - readline  # [unix]
+    - ncurses  # [unix]
+  run:
+    - readline  # [unix]
+    - ncurses  # [unix]
 
 test:
   commands:
-    - test -f $PREFIX/bin/lua
-    - test -f $PREFIX/bin/luac
-    - test -f $PREFIX/lib/liblua.a
-    - test -f $PREFIX/include/lua.h
+    - test -f $PREFIX/bin/lua                       # [unix]
+    - test -f $PREFIX/bin/luac                      # [unix]
+    - test -f $PREFIX/lib/liblua.a                  # [unix]
+    - test -f $PREFIX/include/lua.h                 # [unix]
+    - if not exist %LIBRARY_BIN%\\lua.dll exit 1    # [win]
+    - if not exist %LIBRARY_BIN%\\lua.exe exit 1    # [win]
+    - if not exist %LIBRARY_BIN%\\luac.exe exit 1   # [win]
+    - if not exist %LIBRARY_LIB%\\lua.lib exit 1    # [win]
+    - if not exist %LIBRARY_INC%\\lua.h exit 1      # [win]
     - lua -v
     - lua -e "print(\"Lua path:\" .. package.path)"
     - lua -e "print(\"Lua cpath:\" .. package.cpath)"
